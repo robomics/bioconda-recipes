@@ -1,0 +1,50 @@
+{% set name = "chrom3d" %}
+{% set version = "1.0.3" %}
+{% set sha256 = "3a3ac9f6d8f76ec7585bf3797bbd3d1ebb6e868e556ea33958647a40800f7199" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+build:
+  number: 0
+
+source:
+  # url: https://github.com/Chrom3D/Chrom3D/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/robomics/Chrom3D/archive/refs/heads/devel.zip
+  sha256: {{ sha256 }}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake >=3.9
+    - make
+
+  host:
+    - boost-cpp >=1.54
+
+  run:
+    - boost-cpp >=1.54
+
+about:
+  home: https://github.com/Chrom3D/Chrom3D
+  license: MIT
+  license_file: LICENCE
+  summary: Chrom3D is a computational framework for efficient reconstruction of 3D genome structures using chromosome contact data (Hi-C, TCC and 5C data) and optionally lamin ChIP-seq data.
+  dev_url: https://github.com/Chrom3D/Chrom3D
+  doc_url: https://github.com/Chrom3D/Chrom3D#readme
+
+test:
+  commands:
+    - Chrom3D --help
+    - Chrom3D --version
+
+extra:
+  recipe-maintainers:
+    - jonnings
+    - robomics
+  identifiers:
+    - biotools:Chrom3D
+    - doi.org/10.1186/s13059-016-1146-2
+
